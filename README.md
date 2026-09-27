@@ -1,8 +1,8 @@
 --[[
     ╔══════════════════════════════════════════════════════════╗
-    ║   NOVA CHEAT - SURVIVE THE KILLER (FINAL EDITION v2)     ║
-    ║   Multi-Key Terbaru • 20+ Fitur • UI Modern              ║
-    ║   Kompatibel: HP, Tablet, Laptop, PC                     ║
+    ║        ZetGames STK - SURVIVE THE KILLER                 ║
+    ║        Multi-Key • 20+ Fitur • Toggle Menu               ║
+    ║        Kompatibel: HP, Tablet, Laptop, PC                ║
     ╚══════════════════════════════════════════════════════════╝
 ]]
 
@@ -33,12 +33,12 @@ local Theme = {
     TextDim = Color3.fromRGB(150, 150, 170),
     ButtonOff = Color3.fromRGB(35, 35, 45),
     ButtonOn = Color3.fromRGB(0, 180, 110),
+    ToggleBtn = Color3.fromRGB(0, 200, 255),
 }
 
--- ================== SISTEM KEY (6 KEY TERBARU) ==================
+-- ================== SISTEM KEY ==================
 local function buildKeys()
     local keys = {}
-    -- Helper: build string dari char codes agar key tidak terbaca langsung
     local function sc(...)
         local args = {...}
         local out = {}
@@ -46,54 +46,12 @@ local function buildKeys()
         return table.concat(out)
     end
 
-    -- 1) AzferModz - Premium - Permanent
-    keys[#keys+1] = {
-        key = sc(65,122,102,101,114,77,111,100,122),
-        expires = {year = 9999, month = 12, day = 31},
-        name = "AzferModz",
-        tier = "Premium",
-        status = "Permanent"
-    }
-    -- 2) FreePrem-By-Fazxy - Free - Permanent
-    keys[#keys+1] = {
-        key = sc(70,114,101,101,80,114,101,109,45,66,121,45,70,97,122,120,121),
-        expires = {year = 9999, month = 12, day = 31},
-        name = "FreePrem-By-Fazxy",
-        tier = "Free",
-        status = "Permanent"
-    }
-    -- 3) AzferCode - Code - 26 Nov 2026
-    keys[#keys+1] = {
-        key = sc(65,122,102,101,114,67,111,100,101),
-        expires = {year = 2026, month = 11, day = 26},
-        name = "AzferCode",
-        tier = "Code",
-        status = "26 Nov 2026"
-    }
-    -- 4) AzferHc - Code - 27 Jan 2027
-    keys[#keys+1] = {
-        key = sc(65,122,102,101,114,72,99),
-        expires = {year = 2027, month = 1, day = 27},
-        name = "AzferHc",
-        tier = "Code",
-        status = "27 Jan 2027"
-    }
-    -- 5) FazxyFree - Code - 10 Sept 2027
-    keys[#keys+1] = {
-        key = sc(70,97,122,120,121,70,114,101,101),
-        expires = {year = 2027, month = 9, day = 10},
-        name = "FazxyFree",
-        tier = "Code",
-        status = "10 Sept 2027"
-    }
-    -- 6) AzferFree - Free - 5 Sept 2026 (EXPIRED)
-    keys[#keys+1] = {
-        key = sc(65,122,102,101,114,70,114,101,101),
-        expires = {year = 2026, month = 9, day = 5},
-        name = "AzferFree",
-        tier = "Free",
-        status = "5 Sept 2026"
-    }
+    keys[#keys+1] = {key = sc(65,122,102,101,114,77,111,100,122), expires = {year = 9999, month = 12, day = 31}, name = "AzferModz", tier = "Premium", status = "Permanent"}
+    keys[#keys+1] = {key = sc(70,114,101,101,80,114,101,109,45,66,121,45,70,97,122,120,121), expires = {year = 9999, month = 12, day = 31}, name = "FreePrem-By-Fazxy", tier = "Free", status = "Permanent"}
+    keys[#keys+1] = {key = sc(65,122,102,101,114,67,111,100,101), expires = {year = 2026, month = 11, day = 26}, name = "AzferCode", tier = "Code", status = "26 Nov 2026"}
+    keys[#keys+1] = {key = sc(65,122,102,101,114,72,99), expires = {year = 2027, month = 1, day = 27}, name = "AzferHc", tier = "Code", status = "27 Jan 2027"}
+    keys[#keys+1] = {key = sc(70,97,122,120,121,70,114,101,101), expires = {year = 2027, month = 9, day = 10}, name = "FazxyFree", tier = "Code", status = "10 Sept 2027"}
+    keys[#keys+1] = {key = sc(65,122,102,101,114,70,114,101,101), expires = {year = 2026, month = 9, day = 5}, name = "AzferFree", tier = "Free", status = "5 Sept 2026"}
     return keys
 end
 
@@ -132,7 +90,7 @@ end
 -- ================== UTILITAS ==================
 local function createNotification(text, duration, color)
     local gui = Instance.new("ScreenGui")
-    gui.Name = "NovaNotif"
+    gui.Name = "ZetNotif"
     gui.ResetOnSpawn = false
     gui.Parent = CoreGui
     local frame = Instance.new("Frame")
@@ -199,11 +157,11 @@ local function makeDraggable(gui, handle)
     end)
 end
 
--- ================== KEY GUI (MODERN) ==================
+-- ================== KEY GUI (ZetGames STK) ==================
 local function createKeyGUI()
-    if CoreGui:FindFirstChild("NovaKeyGUI") then CoreGui.NovaKeyGUI:Destroy() end
+    if CoreGui:FindFirstChild("ZetKeyGUI") then CoreGui.ZetKeyGUI:Destroy() end
     local screenGui = Instance.new("ScreenGui")
-    screenGui.Name = "NovaKeyGUI"
+    screenGui.Name = "ZetKeyGUI"
     screenGui.ResetOnSpawn = false
     screenGui.Parent = CoreGui
 
@@ -221,7 +179,7 @@ local function createKeyGUI()
     local header = Instance.new("TextButton")
     header.Size = UDim2.new(1,0,0,50 * scaleFactor)
     header.BackgroundColor3 = Theme.Header
-    header.Text = "🔒  NOVA CHEAT - LOGIN"
+    header.Text = "🔒  ZETGAMES STK - LOGIN"
     header.TextColor3 = Theme.Accent
     header.Font = Enum.Font.GothamBold
     header.TextScaled = true
@@ -324,29 +282,13 @@ end
 
 -- ================== CHEAT SETTINGS ==================
 local CheatSettings = {
-    AutoKillAll = false,
-    KillAura = false,
-    KillAuraRange = 100,
-    ESP = false,
-    SpeedHack = false,
-    SpeedMultiplier = 25,
-    JumpPower = false,
-    JumpPowerValue = 120,
-    Fly = false,
-    FlySpeed = 80,
-    Noclip = false,
-    InfiniteJump = false,
-    GodMode = false,
-    DestroyMap = false,
-    GrabAllItems = false,
-    TeleportAllToMe = false,
-    AntiAFK = true,
-    FullBright = false,
-    NoFog = false,
-    TimeChanger = false,
-    TimeValue = 12,
-    GravityControl = false,
-    GravityValue = 50,
+    AutoKillAll = false, KillAura = false, KillAuraRange = 100,
+    ESP = false, SpeedHack = false, SpeedMultiplier = 25,
+    JumpPower = false, JumpPowerValue = 120,
+    Fly = false, FlySpeed = 80, Noclip = false, InfiniteJump = false,
+    GodMode = false, DestroyMap = false, GrabAllItems = false, TeleportAllToMe = false,
+    AntiAFK = true, FullBright = false, NoFog = false,
+    TimeChanger = false, TimeValue = 12, GravityControl = false, GravityValue = 50,
     TargetPlayerName = "",
 }
 
@@ -369,8 +311,7 @@ function autoKillAll()
     if not isKiller then
         for _, tool in ipairs(char:GetChildren()) do
             if tool:IsA("Tool") and (tool.Name:lower():find("knife") or tool.Name:lower():find("kill")) then
-                isKiller = true
-                break
+                isKiller = true; break
             end
         end
     end
@@ -378,10 +319,7 @@ function autoKillAll()
     for _, player in ipairs(Players:GetPlayers()) do
         if player ~= LocalPlayer then
             local tHum = getHum(getChar(player))
-            if tHum and tHum.Health > 0 then
-                tHum.Health = 0
-                task.wait(0.03)
-            end
+            if tHum and tHum.Health > 0 then tHum.Health = 0; task.wait(0.03) end
         end
     end
 end
@@ -396,9 +334,7 @@ function killAura()
             local tHum = getHum(tChar)
             local tRoot = getRoot(tChar)
             if tHum and tRoot and tHum.Health > 0 then
-                if (root.Position - tRoot.Position).Magnitude <= CheatSettings.KillAuraRange then
-                    tHum.Health = 0
-                end
+                if (root.Position - tRoot.Position).Magnitude <= CheatSettings.KillAuraRange then tHum.Health = 0 end
             end
         end
     end
@@ -406,23 +342,20 @@ end
 
 local espCache = {}
 function updateESP()
-    for _, obj in pairs(espCache) do
-        if obj and obj.Parent then obj:Destroy() end
-    end
+    for _, obj in pairs(espCache) do if obj and obj.Parent then obj:Destroy() end end
     espCache = {}
     if not CheatSettings.ESP then return end
     for _, player in ipairs(Players:GetPlayers()) do
         if player ~= LocalPlayer then
             local char = getChar(player)
             if char and char:FindFirstChild("Head") then
-                local head = char.Head
                 local bb = Instance.new("BillboardGui")
                 bb.Name = "ESP_"..player.Name
-                bb.Adornee = head
+                bb.Adornee = char.Head
                 bb.Size = UDim2.new(0, 200, 0, 50)
                 bb.StudsOffset = Vector3.new(0, 3, 0)
                 bb.AlwaysOnTop = true
-                bb.Parent = head
+                bb.Parent = char.Head
                 local lbl = Instance.new("TextLabel")
                 lbl.Size = UDim2.new(1,0,1,0)
                 lbl.BackgroundTransparency = 1
@@ -447,13 +380,8 @@ end
 function applyJump()
     local hum = getHum(getChar(LocalPlayer))
     if hum then
-        if CheatSettings.JumpPower then
-            hum.UseJumpPower = true
-            hum.JumpPower = CheatSettings.JumpPowerValue
-        else
-            hum.UseJumpPower = false
-            hum.JumpHeight = 7.2
-        end
+        if CheatSettings.JumpPower then hum.UseJumpPower = true; hum.JumpPower = CheatSettings.JumpPowerValue
+        else hum.UseJumpPower = false; hum.JumpHeight = 7.2 end
     end
 end
 
@@ -463,22 +391,13 @@ function toggleFly()
     if not root then return end
     if not CheatSettings.Fly then
         if flyConn then flyConn:Disconnect() flyConn = nil end
-        for _, v in ipairs({root:FindFirstChild("NovaBG"), root:FindFirstChild("NovaBV")}) do
-            if v then v:Destroy() end
-        end
+        for _, v in ipairs({root:FindFirstChild("ZetBG"), root:FindFirstChild("ZetBV")}) do if v then v:Destroy() end end
         return
     end
     local bg = Instance.new("BodyGyro")
-    bg.Name = "NovaBG"
-    bg.P = 9e4
-    bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-    bg.cframe = root.CFrame
-    bg.Parent = root
+    bg.Name = "ZetBG"; bg.P = 9e4; bg.maxTorque = Vector3.new(9e9,9e9,9e9); bg.cframe = root.CFrame; bg.Parent = root
     local bv = Instance.new("BodyVelocity")
-    bv.Name = "NovaBV"
-    bv.velocity = Vector3.new(0,0,0)
-    bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-    bv.Parent = root
+    bv.Name = "ZetBV"; bv.velocity = Vector3.new(0,0,0); bv.maxForce = Vector3.new(9e9,9e9,9e9); bv.Parent = root
     flyConn = RunService.RenderStepped:Connect(function()
         if not CheatSettings.Fly then return end
         local dir = Vector3.new(0,0,0)
@@ -521,8 +440,7 @@ function toggleGodMode()
     local hum = getHum(getChar(LocalPlayer))
     if not hum then return end
     if CheatSettings.GodMode then
-        hum.MaxHealth = math.huge
-        hum.Health = math.huge
+        hum.MaxHealth = math.huge; hum.Health = math.huge
         hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
         if not godConn then
             godConn = hum.HealthChanged:Connect(function()
@@ -530,8 +448,7 @@ function toggleGodMode()
             end)
         end
     else
-        hum.MaxHealth = 100
-        hum.Health = 100
+        hum.MaxHealth = 100; hum.Health = 100
         hum:SetStateEnabled(Enum.HumanoidStateType.Dead, true)
         if godConn then godConn:Disconnect() godConn = nil end
     end
@@ -540,14 +457,12 @@ end
 function destroyMap()
     if not CheatSettings.DestroyMap then return end
     local playerChars = {}
-    for _, p in ipairs(Players:GetPlayers()) do
-        if p.Character then playerChars[p.Character] = true end
-    end
+    for _, p in ipairs(Players:GetPlayers()) do if p.Character then playerChars[p.Character] = true end end
     for _, obj in ipairs(Workspace:GetDescendants()) do
         if obj:IsA("BasePart") then
             local skip = false
             for char, _ in pairs(playerChars) do
-                if obj:IsDescendantOf(char) then skip = true break end
+                if obj:IsDescendantOf(char) then skip = true; break end
             end
             if not skip then obj:Destroy() end
         end
@@ -563,7 +478,7 @@ function grabAll()
         if obj:IsA("Tool") and obj.Parent ~= bp then
             local skip = false
             for _, p in ipairs(Players:GetPlayers()) do
-                if p.Character and obj:IsDescendantOf(p.Character) then skip = true break end
+                if p.Character and obj:IsDescendantOf(p.Character) then skip = true; break end
             end
             if not skip then obj.Parent = bp end
         end
@@ -578,9 +493,7 @@ function tpAllToMe()
     for _, p in ipairs(Players:GetPlayers()) do
         if p ~= LocalPlayer then
             local tRoot = getRoot(getChar(p))
-            if tRoot then
-                tRoot.CFrame = CFrame.new(myRoot.Position + Vector3.new(math.random(-5,5), 3, math.random(-5,5)))
-            end
+            if tRoot then tRoot.CFrame = CFrame.new(myRoot.Position + Vector3.new(math.random(-5,5), 3, math.random(-5,5))) end
         end
     end
     CheatSettings.TeleportAllToMe = false
@@ -600,30 +513,22 @@ function antiAFK()
     if not CheatSettings.AntiAFK then return end
     local vu = game:GetService("VirtualUser")
     LocalPlayer.Idled:Connect(function()
-        vu:CaptureController()
-        vu:ClickButton2(Vector2.new())
+        vu:CaptureController(); vu:ClickButton2(Vector2.new())
     end)
     CheatSettings.AntiAFK = false
 end
 
 function applyFullBright()
     if CheatSettings.FullBright then
-        Lighting.Ambient = Color3.fromRGB(255,255,255)
-        Lighting.Brightness = 2
+        Lighting.Ambient = Color3.fromRGB(255,255,255); Lighting.Brightness = 2
     else
-        Lighting.Ambient = Color3.fromRGB(70,70,70)
-        Lighting.Brightness = 1
+        Lighting.Ambient = Color3.fromRGB(70,70,70); Lighting.Brightness = 1
     end
 end
 
 function applyNoFog()
-    if CheatSettings.NoFog then
-        Lighting.FogEnd = 1e10
-        Lighting.FogStart = 1e10
-    else
-        Lighting.FogEnd = 100000
-        Lighting.FogStart = 0
-    end
+    if CheatSettings.NoFog then Lighting.FogEnd = 1e10; Lighting.FogStart = 1e10
+    else Lighting.FogEnd = 100000; Lighting.FogStart = 0 end
 end
 
 function applyTime()
@@ -634,16 +539,41 @@ function applyGravity()
     Workspace.Gravity = CheatSettings.GravityControl and CheatSettings.GravityValue or 196.2
 end
 
--- ================== MAIN CHEAT GUI ==================
+-- ================== MAIN CHEAT GUI (ZetGames STK) ==================
+local menuVisible = true
+local toggleBtnRef = nil
+local mainFrameRef = nil
+
 function loadCheatGUI()
-    if CoreGui:FindFirstChild("NovaCheatGUI") then CoreGui.NovaCheatGUI:Destroy() end
+    if CoreGui:FindFirstChild("ZetCheatGUI") then CoreGui.ZetCheatGUI:Destroy() end
 
     local gui = Instance.new("ScreenGui")
-    gui.Name = "NovaCheatGUI"
+    gui.Name = "ZetCheatGUI"
     gui.ResetOnSpawn = false
     gui.Parent = CoreGui
 
+    -- ===== FLOATING TOGGLE BUTTON (Buka/Tutup Menu) =====
+    local toggleBtn = Instance.new("TextButton")
+    toggleBtn.Name = "ZetToggleBtn"
+    toggleBtn.Size = UDim2.new(0, 65 * scaleFactor, 0, 65 * scaleFactor)
+    toggleBtn.Position = UDim2.new(0, 20 * scaleFactor, 0.5, -32 * scaleFactor)
+    toggleBtn.BackgroundColor3 = Theme.ToggleBtn
+    toggleBtn.Text = "ZG"
+    toggleBtn.TextColor3 = Color3.new(1,1,1)
+    toggleBtn.Font = Enum.Font.GothamBlack
+    toggleBtn.TextScaled = true
+    toggleBtn.Parent = gui
+    Instance.new("UICorner", toggleBtn).CornerRadius = UDim.new(1, 0)
+    local toggleStroke = Instance.new("UIStroke", toggleBtn)
+    toggleStroke.Color = Color3.new(1,1,1)
+    toggleStroke.Thickness = 2
+    toggleBtnRef = toggleBtn
+
+    makeDraggable(toggleBtn, toggleBtn)
+
+    -- ===== MAIN MENU =====
     local main = Instance.new("Frame")
+    main.Name = "ZetMainMenu"
     main.Size = UDim2.new(0, 440 * scaleFactor, 0, 540 * scaleFactor)
     main.Position = UDim2.new(0.5, -220 * scaleFactor, 0.5, -270 * scaleFactor)
     main.BackgroundColor3 = Theme.Background
@@ -653,11 +583,12 @@ function loadCheatGUI()
     local stroke = Instance.new("UIStroke", main)
     stroke.Color = Theme.Accent
     stroke.Thickness = 2
+    mainFrameRef = main
 
     local header = Instance.new("TextButton")
     header.Size = UDim2.new(1,0,0,45 * scaleFactor)
     header.BackgroundColor3 = Theme.Header
-    header.Text = "⚡ NOVA CHEAT v2 - SURVIVE THE KILLER"
+    header.Text = "⚡ ZETGAMES STK - SURVIVE THE KILLER"
     header.TextColor3 = Theme.Accent
     header.Font = Enum.Font.GothamBold
     header.TextScaled = true
@@ -666,6 +597,7 @@ function loadCheatGUI()
     Instance.new("UICorner", header).CornerRadius = UDim.new(0, 12)
     makeDraggable(main, header)
 
+    -- Tombol close (X) — sembunyikan menu
     local closeBtn = Instance.new("TextButton")
     closeBtn.Size = UDim2.new(0, 35 * scaleFactor, 0, 35 * scaleFactor)
     closeBtn.Position = UDim2.new(1, -40 * scaleFactor, 0, 5 * scaleFactor)
@@ -676,8 +608,39 @@ function loadCheatGUI()
     closeBtn.TextScaled = true
     closeBtn.Parent = main
     Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 8)
-    closeBtn.MouseButton1Click:Connect(function() gui:Destroy() end)
 
+    -- Fungsi toggle menu
+    local function setMenuVisible(vis)
+        menuVisible = vis
+        if vis then
+            main.Visible = true
+            main.Size = UDim2.new(0, 0, 0, 0)
+            TweenService:Create(main, TweenInfo.new(0.25, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                Size = UDim2.new(0, 440 * scaleFactor, 0, 540 * scaleFactor)
+            }):Play()
+            TweenService:Create(toggleBtn, TweenInfo.new(0.2), {BackgroundColor3 = Theme.ToggleBtn}):Play()
+        else
+            TweenService:Create(main, TweenInfo.new(0.2), {
+                Size = UDim2.new(0, 0, 0, 0)
+            }):Play()
+            TweenService:Create(toggleBtn, TweenInfo.new(0.2), {BackgroundColor3 = Theme.Danger}):Play()
+            task.delay(0.22, function() if not menuVisible then main.Visible = false end end)
+        end
+    end
+
+    closeBtn.MouseButton1Click:Connect(function() setMenuVisible(false) end)
+
+    -- Klik tombol floating untuk toggle
+    local toggleClickCooldown = false
+    toggleBtn.MouseButton1Click:Connect(function()
+        if toggleClickCooldown then return end
+        toggleClickCooldown = true
+        setMenuVisible(not menuVisible)
+        task.wait(0.3)
+        toggleClickCooldown = false
+    end)
+
+    -- Tab system
     local tabContainer = Instance.new("Frame")
     tabContainer.Size = UDim2.new(1, 0, 0, 35 * scaleFactor)
     tabContainer.Position = UDim2.new(0, 0, 0, 50 * scaleFactor)
@@ -724,13 +687,9 @@ function loadCheatGUI()
         btn.Parent = tabContainer
         Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
         tabButtons[tabName] = btn
-
         btn.MouseButton1Click:Connect(function()
             for _, page in pairs(pageFrames) do page.Visible = false end
-            for _, b in pairs(tabButtons) do
-                b.BackgroundColor3 = Theme.ButtonOff
-                b.TextColor3 = Theme.Text
-            end
+            for _, b in pairs(tabButtons) do b.BackgroundColor3 = Theme.ButtonOff; b.TextColor3 = Theme.Text end
             pageFrames[tabName].Visible = true
             btn.BackgroundColor3 = Theme.AccentDark
         end)
@@ -748,8 +707,7 @@ function loadCheatGUI()
         btn.TextXAlignment = Enum.TextXAlignment.Left
         btn.Parent = parent
         Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
-        local pad = Instance.new("UIPadding", btn)
-        pad.PaddingLeft = UDim.new(0, 12)
+        local pad = Instance.new("UIPadding", btn); pad.PaddingLeft = UDim.new(0, 12)
 
         local indicator = Instance.new("Frame")
         indicator.Size = UDim2.new(0, 50 * scaleFactor, 0, 24 * scaleFactor)
@@ -769,11 +727,9 @@ function loadCheatGUI()
 
         local function refresh()
             if CheatSettings[settingKey] then
-                indicator.BackgroundColor3 = Theme.ButtonOn
-                indText.Text = "ON"
+                indicator.BackgroundColor3 = Theme.ButtonOn; indText.Text = "ON"
             else
-                indicator.BackgroundColor3 = Color3.fromRGB(80,80,90)
-                indText.Text = "OFF"
+                indicator.BackgroundColor3 = Color3.fromRGB(80,80,90); indText.Text = "OFF"
             end
         end
 
@@ -826,11 +782,9 @@ function loadCheatGUI()
             label.Text = name..": "..tostring(val)
             if callback then callback(val) end
         end
-
         slider.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                dragging = true
-                updateFromInput(input)
+                dragging = true; updateFromInput(input)
             end
         end)
         slider.InputChanged:Connect(function(input)
@@ -922,9 +876,7 @@ function loadCheatGUI()
 
     tpDropdown.MouseButton1Click:Connect(function()
         tpList.Visible = not tpList.Visible
-        for _, c in ipairs(tpList:GetChildren()) do
-            if c:IsA("TextButton") then c:Destroy() end
-        end
+        for _, c in ipairs(tpList:GetChildren()) do if c:IsA("TextButton") then c:Destroy() end end
         for _, p in ipairs(Players:GetPlayers()) do
             if p ~= LocalPlayer then
                 local b = Instance.new("TextButton")
@@ -947,6 +899,7 @@ function loadCheatGUI()
         tpList.Size = UDim2.new(1, 0, 0, #tpList:GetChildren() * 33 * scaleFactor)
     end)
 
+    -- Mobile fly controls
     if isMobile then
         local flyFrame = Instance.new("Frame")
         flyFrame.Size = UDim2.new(0, 140 * scaleFactor, 0, 140 * scaleFactor)
@@ -971,13 +924,12 @@ function loadCheatGUI()
             b.TextScaled = true
             b.Parent = flyFrame
             Instance.new("UICorner", b).CornerRadius = UDim.new(0, 8)
-            b.MouseButton1Down:Connect(function()
-                if CheatSettings.Fly then _G.FlyTouchDirection = d.vec end
-            end)
+            b.MouseButton1Down:Connect(function() if CheatSettings.Fly then _G.FlyTouchDirection = d.vec end end)
             b.MouseButton1Up:Connect(function() _G.FlyTouchDirection = nil end)
         end
     end
 
+    -- Main loop
     RunService.Heartbeat:Connect(function()
         autoKillAll()
         killAura()
@@ -987,11 +939,21 @@ function loadCheatGUI()
         if CheatSettings.ESP then updateESP() end
         if CheatSettings.TimeChanger then applyTime() end
     end)
+
+    -- Keybind PC: RightShift untuk toggle menu
+    if not isMobile then
+        UserInputService.InputBegan:Connect(function(input, gp)
+            if gp then return end
+            if input.KeyCode == Enum.KeyCode.RightShift then
+                setMenuVisible(not menuVisible)
+            end
+        end)
+    end
 end
 
 -- ================== START ==================
 task.spawn(function()
     task.wait(1)
     createKeyGUI()
-    print("[Nova Cheat] v2 Multi-Key dimuat. Silakan login.")
+    print("[ZetGames STK] Script dimuat. Silakan login dengan key.")
 end)
